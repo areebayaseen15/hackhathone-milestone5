@@ -142,7 +142,7 @@ function shareResume(data: ResumeData) {
     `;
 
     //  URL 
-    const customURL = 'https://hackatone-milestone1.vercel.app/';
+    const customURL = 'https://hackhathone-milestone5-areeba15.vercel.app/';
 
     if (navigator.share) {
         navigator.share({
@@ -188,7 +188,7 @@ function downloadResume(data: ResumeData) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'resume.txt'; // Change this to '.pdf' if you prefer PDF format
+    link.download = 'resume.txt';
     link.click();
     URL.revokeObjectURL(url);
 }
