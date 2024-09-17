@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -5,24 +6,27 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
+
 }
-a{
-    color: black;
-}
+
 #resumeForm {
     margin: 40px auto;
-    max-width: 900px;
     padding: 20px;
-    overflow: hidden;
+  
 }
 
 .sections {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+
 }
 
 .other-details {
-    margin-left:auto;
+    margin-left: 20%;
+
 }
 
 h1 {
@@ -64,6 +68,7 @@ form:hover {
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
+    width: auto;
 }
 
 h1 {
@@ -83,23 +88,26 @@ label {
 input,
 select,
 textarea {
-    width: 95%;
+    width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #f9f9f9;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    margin-right: auto;
 }
-
+input{
+    width: 90%;
+}
 input:focus,
 select:focus,
 textarea:focus {
     background-color: #e6f7ff;
     box-shadow: 0 0 8px rgba(0, 115, 230, 0.3);
-    outline: none;
-
+    /* outline: none; */
 }
 
 button {
@@ -132,10 +140,19 @@ button:hover {
 }
 
 @media (max-width: 768px) {
+    
+.sections {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    overflow: hidden;
+}
+
     form,
     #resume {
         padding: 20px;
         margin: 20px;
+        overflow: hidden;
     }
 
     input,
@@ -184,23 +201,188 @@ button:hover {
 
 #resume{
     margin: auto;
-}
-.text-color{
-    background-color: red;
-}
-#editButton {
-    background-color: rgb(4, 4, 31);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 20px auto;
-    display: block;
+} 
+
+li {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 10px;
     transition: background-color 0.3s ease;
 }
 
-#editButton:hover {
-    background-color: #005bb5;
+li:hover {
+    background-color: #f1f1f1;
+}
+
+
+
+
+
+/* Generated resume */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f4f1;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    overflow-wrap: break-word;
+}
+
+/* sidebar */
+.sidebar{
+    background-color:#7f9d8a;
+    color: white;
+    width: 40%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left:3%;
+    margin-top: 0;
+}
+
+img{
+    display: block;
+    width: 70%;
+    margin: auto;
+    margin-top: 20%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    text-decoration: 5px #7f9d8a underline;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffddb3;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+.profile-info, .contact-info, .social-info {
+    margin-top: 20%;
+}
+
+.contact-info p, .social-info p {
+    color: #f8f8f8;
+}
+
+.contact-info i {
+    padding: 3%;
+}
+
+
+button {
+    background-color: rgb(46, 46, 97);
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color:rgb(245, 212, 218);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* main section */
+
+.main{
+    width: 100%;
+}
+
+.name{
+    padding: 10%;
+    margin-top: 10%;
+    background-color: rgb(245, 212, 218);
+    width: 85%;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+.name p{
+    margin-left: 0;
+}
+
+.main h2 {
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.main p, .main ul {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+    margin-left: 5%;
+}
+
+.main ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.main ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Responsive Design */
+
+/* Small screens (below 768px) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+    }
+
+    .sidebar {
+        width: 40%;
+        margin-left: 0;
+    }
+
+    .main {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    img {
+        width: 60%;
+        margin-top: 10%;
+    }
+
+    .name {
+        width: 100%;
+        padding: 8%;
+        font-size: 70%;
+    }
+    button{
+        padding: 8px 15px;
+    }
+    .contact-info p{
+        overflow-wrap: break-word;
+    }
 }
