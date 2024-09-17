@@ -1,4 +1,3 @@
-
 // TypeScript interface to structure user data
 interface UserDetails {
   name: string;
@@ -15,13 +14,24 @@ interface UserDetails {
   github: string;
   profileImage: string;
 }
+
 const resumeForm = document.getElementById("resumeForm") as HTMLFormElement;
 const resumeSection = document.getElementById("resume") as HTMLElement;
 const editButton = document.getElementById("editButton") as HTMLButtonElement;
 
-
 let isEditing = false;
-let imageUrl: string | null 
+let imageUrl: string | null;
+
+document.getElementById('profile-image')?.addEventListener('change', function (event) {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imageUrl = e.target?.result as string; 
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
 resumeForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -46,8 +56,7 @@ resumeForm.addEventListener("submit", (e) => {
         .value,
       profile: (document.getElementById("profile") as HTMLTextAreaElement)
         .value,
-     profileImage: imageUrl || ""
-       
+      profileImage: imageUrl || "", // Use the uploaded image URL
     };
 
     displayResume(resumeData);
@@ -67,23 +76,20 @@ function displayResume(data: UserDetails) {
                 <h3>Profile</h3>
                 <ul>
                     <p>${data.profile}</p>
-                   
                 </ul>
-              
             </div>
 
             <div class="contact-info">
                 <h3>Contact Me</h3>
-                
                 <p><i class="fa fa-phone"></i>${data.phone}</p>
                 <p><i class="fa fa-envelope"></i>${data.email}</p>
                 <p><i class="fa fa-map-marker"></i>${data.linkdin}</p>
-                
             </div>
+
             <div class="social-info">
                 <h3>Professional Accounts</h3>
-                <p><strong>Github Account:</strong><br><a href="">${data.github}</a> </p>
-                <p><strong>LinkedIn Profile:</strong><br><a href="">${data.linkdin}</a> </p>
+                <p><strong>Github Account:</strong><br><a href="${data.github}">${data.github}</a> </p>
+                <p><strong>LinkedIn Profile:</strong><br><a href="${data.linkdin}">${data.linkdin}</a> </p>
             </div>
         </div>
         <!-- Main section -->
@@ -91,13 +97,11 @@ function displayResume(data: UserDetails) {
                 <div class="name">
             <h1>${data.name}</h1>
             <p>${data.profession}</p>
-
                 </div>
                 <div class="education">
                 <h2>Education</h2>
                     <ul>
                 <li>${data.qualifications}</li>
-              
             </ul>
                 </div>
 
@@ -106,61 +110,43 @@ function displayResume(data: UserDetails) {
                     <ul>
                         <li>${data.courses}</li>
                     </ul>
-                
                 </div>
 
                 <div class="skills" id="skills">
                     <h2>Technical Skills</h2>
                     <ul>
-                        <li> ${data.skills}</li>
-                       
+                        <li>${data.skills}</li>
                     </ul>
                 </div>
 
-                <div class="experiece">
+                <div class="experience">
                     <h2>Work Experience</h2>
                     <ul>
-                     <li> ${data.experience}</li></ul>
-                   
-                    
+                     <li>${data.experience}</li></ul>
                 </div>
 
                 <div class="Reference">
                     <h2>Reference</h2>
                     <p>Will be furnished upon request.</p>
                 </div>
-
-                <div class = "SharableLink">
-                <h2>Sharrable link: </h2>
-                 <a href = "#">https://hackhathone-milestone5-areeba15.vercel.app/</a>
-               </div>
-
             </div>
-        
-    </div>
-
+        </div>
      <button id="shareButton">Share Resume</button>
-    <a href="https://hackatone-milestone1.vercel.app/"></a>
-    <button id="downloadButton">Download Resume</button>
+     <button id="downloadButton">Download Resume</button>
     `;
 
   resumeSection.innerHTML = resumeHTML;
   toggleFormElements(true);
 
-  // Add event listeners for the new buttons
-  const shareButton = document.getElementById(
-    "shareButton"
-  ) as HTMLButtonElement;
-  const downloadButton = document.getElementById(
-    "downloadButton"
-  ) as HTMLButtonElement;
+  const shareButton = document.getElementById("shareButton") as HTMLButtonElement;
+  const downloadButton = document.getElementById("downloadButton") as HTMLButtonElement;
 
   shareButton.addEventListener("click", () => {
     shareResume(data);
   });
 
   downloadButton.addEventListener("click", () => {
-    downloadResume(data);
+    downloadResume();
   });
 }
 
@@ -189,100 +175,29 @@ editButton.addEventListener("click", () => {
   }
 });
 
+// Share the generated resume 
 function shareResume(data: UserDetails) {
   const resumeText = `
-        Personal Details
-       
-       <div class="container">
-        <!-- sidebar -->
-        <div class="sidebar">
-            <div class="profile-image">
-         <img src="${data.profileImage}" alt="${data.name}">
-                </div>
-            
-            <div class="profile-info">
-                <h3>Profile</h3>
-                <ul>
-                    <p>${data.profile}</p>
-                   
-                </ul>
-              
-            </div>
-
-            <div class="contact-info">
-                <h3>Contact Me</h3>
-                
-                <p><i class="fa fa-phone"></i>${data.phone}</p>
-                <p><i class="fa fa-envelope"></i>${data.email}</p>
-                <p><i class="fa fa-map-marker"></i>${data.linkdin}</p>
-                
-            </div>
-            <div class="social-info">
-                <h3>Professional Accounts</h3>
-                <p><strong>Github Account:</strong><br><a href="">${data.github}</a> </p>
-                <p><strong>LinkedIn Profile:</strong><br><a href="">${data.linkdin}</a> </p>
-            </div>
-        </div>
-        <!-- Main section -->
-            <div class="main">
-                <div class="name">
-            <h1>${data.name}</h1>
-            <p>${data.profession}</p>
-
-                </div>
-                <div class="education">
-                <h2>Education</h2>
-                    <ul>
-                <li>${data.qualifications}</li>
-              
-            </ul>
-                </div>
-
-                <div class="Technical-courses">
-                    <h2>Technical Courses</h2>
-                    <ul>
-                        <li>${data.courses}</li>
-                    </ul>
-                
-                </div>
-
-                <div class="skills" id="skills">
-                    <h2>Technical Skills</h2>
-                    <ul>
-                        <li> ${data.skills}</li>
-                       
-                    </ul>
-                </div>
-
-                <div class="experiece">
-                    <h2>Work Experience</h2>
-                    <ul>
-                     <li> ${data.experience}</li></ul>
-                   
-                    
-                </div>
-
-                <div class="Reference">
-                    <h2>Reference</h2>
-                    <p>Will be furnished upon request.</p>
-                </div>
-
-                
-            </div>
-        
-    </div>
-     
-    `;
-
-  //  URL
-  const customURL = "https://hackhathone-milestone5-areeba15.vercel.app/";
+       Personal Details:
+      Name: ${data.name}
+      Profession: ${data.profession}
+      Profile: ${data.profile}
+      Contact: ${data.phone}, ${data.email}
+      LinkedIn: ${data.linkdin}
+      GitHub: ${data.github}
+        Qualification:
+      Education: ${data.qualifications}
+      technical Courses : ${data.courses}
+       Technical Skills:
+      Skills: ${data.skills}
+      Experience: ${data.experience}
+  `;
 
   if (navigator.share) {
     navigator
       .share({
         title: "My Resume",
         text: resumeText,
-        url: customURL,
       })
       .catch((error) => console.log("Error sharing", error));
   } else {
@@ -293,99 +208,23 @@ function shareResume(data: UserDetails) {
   }
 }
 
-function downloadResume(data: UserDetails) {
-  const resumeText = `
-      Personal Details
-       
-       <div class="container">
-        <!-- sidebar -->
-        <div class="sidebar">
-            <div class="profile-image">
-         <img src="${data.profileImage}" alt="${data.name}">
-                </div>
-            
-            <div class="profile-info">
-                <h3>Profile</h3>
-                <ul>
-                    <p>${data.profile}</p>
-                   
-                </ul>
-              
-            </div>
-
-            <div class="contact-info">
-                <h3>Contact Me</h3>
-                
-                <p><i class="fa fa-phone"></i>${data.phone}</p>
-                <p><i class="fa fa-envelope"></i>${data.email}</p>
-                <p><i class="fa fa-map-marker"></i>${data.linkdin}</p>
-                
-            </div>
-            <div class="social-info">
-                <h3>Professional Accounts</h3>
-                <p><strong>Github Account:</strong><br><a href="">${data.github}</a> </p>
-                <p><strong>LinkedIn Profile:</strong><br><a href="">${data.linkdin}</a> </p>
-            </div>
-        </div>
-        <!-- Main section -->
-            <div class="main">
-                <div class="name">
-            <h1>${data.name}</h1>
-            <p>${data.profession}</p>
-
-                </div>
-                <div class="education">
-                <h2>Education</h2>
-                    <ul>
-                <li>${data.qualifications}</li>
-              
-            </ul>
-                </div>
-
-                <div class="Technical-courses">
-                    <h2>Technical Courses</h2>
-                    <ul>
-                        <li>${data.courses}</li>
-                    </ul>
-                
-                </div>
-
-                <div class="skills" id="skills">
-                    <h2>Technical Skills</h2>
-                    <ul>
-                        <li> ${data.skills}</li>
-                       
-                    </ul>
-                </div>
-
-                <div class="experiece">
-                    <h2>Work Experience</h2>
-                    <ul>
-                     <li> ${data.experience}</li></ul>
-                   
-                    
-                </div>
-
-                <div class="Reference">
-                    <h2>Reference</h2>
-                    <p>Will be furnished upon request.</p>
-                </div>
-            </div>
-        
-    </div>
-
-   
-    `;
-    
-   
-
-   
-
-  const blob = new Blob([resumeText], { type: "pdf" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "resume.pdf";
-  link.click();
-  URL.revokeObjectURL(url);
+// Function to download the resume as PDF
+function downloadResume() {
+  const newWindow = window.open('', '_blank');
+  if (newWindow) {
+    newWindow.document.write(`
+      <html>
+        <head>
+          <title>Resume</title>
+        </head>
+        <body>
+          ${resumeSection.innerHTML}
+        </body>
+      </html>
+    `);
+    newWindow.document.close();
+    newWindow.print();
+  } else {
+    alert("Failed to open new window.");
+  }
 }
