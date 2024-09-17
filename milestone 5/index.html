@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharrable Resume</title>
+    <title>Sharrable Dynamic Resume</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -92,12 +92,13 @@
 </div>
 </div>
 <button type="submit" id="">Generate Resume</button>
+<button id="editButton">Edit Resume</button>
 
     </form>
 
 
 
-    <!-- User  Generated Resume -->
+    <!-- User  Generated Resume with sharrable link and download  -->
     <div id="resume">
         <h1> User Resume</h1>
         <div class="sections">
@@ -109,10 +110,13 @@
                      
          </div>
       
+<div class="sharrable-link" style="display: none;">
+    <h1>sharrable Link</h1>
+    <a href="#" id="link" target="_blank"></a><br>
+    <button id="pdf">Download Resume</button>
+</div>
 
-        
-    <script src="main.js"></script>
-    
+<script src="main.js"></script>    
 </body>
 
 </html>
