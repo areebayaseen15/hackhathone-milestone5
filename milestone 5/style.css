@@ -252,7 +252,7 @@ body {
 
 img{
     display: block;
-    width: 70%;
+    height : auto;
     margin: auto;
     margin-top: 20%;
     border-radius: 50%;
